@@ -1,0 +1,12 @@
+th > a:after {
+    content: " \f0dc";
+    font-family: FontAwesome;
+}
+th > a.asc:after {
+    content: " \f0dd";
+    font-family: FontAwesome;
+}
+th > a.desc:after {
+    content: " \f0de";
+    font-family: FontAwesome;
+}
