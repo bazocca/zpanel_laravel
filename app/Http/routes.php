@@ -23,7 +23,7 @@
 |
 */
 
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'web'], function () {
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Routing
@@ -34,9 +34,7 @@ Route::group(['middleware' => 'admin'], function () {
 	|
 	*/
 	Route::group(array('namespace' => 'Admin', 'prefix' => 'zpanel'), function() {
-		Route::get('/', 'UserController@getLogin');
-		Route::post('/', 'UserController@postLogin');
-		Route::get('logout', 'UserController@logout');
+		Route::get('logout', 'UserController@logoutAdmin');
 		Route::get('dashboard', 'DashboardController@index');
 		
 	});
@@ -53,7 +51,7 @@ Route::group(['middleware' => 'web'], function () {
 	|
 	*/
 	Route::group(array('namespace' => 'Admin', 'prefix' => 'zpanel'), function() {
-		Route::get('/', 'UserController@getLogin');
-		Route::post('/', 'UserController@postLogin');
+		Route::get('/', 'UserController@getLoginAdmin');
+		Route::post('/', 'UserController@postLoginAdmin');
 	});
 });

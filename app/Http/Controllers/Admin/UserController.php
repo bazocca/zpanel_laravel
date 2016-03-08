@@ -5,7 +5,7 @@ use Auth, Request, Session;
 
 class UserController extends Controller
 {
-    public function getLogin(){
+    public function getLoginAdmin(){
 		return view($this->pathBack.'user.login')->with(
 			[
 				'title' => 'Login | '.$this->web_title,
@@ -15,10 +15,16 @@ class UserController extends Controller
 		);
 	}
 	
-    public function postLogin(){
+    public function postLoginAdmin(){
 		$input = Request::all();
-		if (Auth::attempt(['username' => $input["username"], 'password' => $input["password"], 'status' => 1])) {
-			
+		$auth = auth()->guard('admin');
+        $credentials = [
+            'username' =>  $input["username"],
+            'password' =>  $input["password"],
+			'status' => 1
+        ];
+		if ($auth->attempt($credentials)) {
+			return redirect('/zpanel/dashboard');
 		} else {
 			return redirect('/zpanel')->with('auth-error', 'Username or password is incorrect');
 		}
@@ -31,8 +37,9 @@ class UserController extends Controller
 		);
 	}
 	
-	public function logout(){
-		Auth::logout();
-	}
+	public function logoutAdmin(){
+		Auth::guard('admin')->logout();
+		return redirect('/zpanel');
+	}	
 	
 }
