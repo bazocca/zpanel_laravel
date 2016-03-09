@@ -6,6 +6,9 @@ use Auth, Request, Session;
 class UserController extends Controller
 {
     public function getLoginAdmin(){
+		if(auth()->guard('admin')->check()){
+            return redirect('/zpanel/dashboard');
+        }
 		return view($this->pathBack.'user.login')->with(
 			[
 				'title' => 'Login | '.$this->web_title,
@@ -16,6 +19,9 @@ class UserController extends Controller
 	}
 	
     public function postLoginAdmin(){
+		if(auth()->guard('admin')->check()){
+            return redirect('/zpanel/dashboard');
+        }
 		$input = Request::all();
 		$auth = auth()->guard('admin');
         $credentials = [

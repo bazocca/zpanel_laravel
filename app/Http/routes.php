@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-	Route::get('/', 'HomeController@index');
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +22,7 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => 'admin'], function () {
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Routing
@@ -54,4 +53,11 @@ Route::group(['middleware' => 'web'], function () {
 		Route::get('/', 'UserController@getLoginAdmin');
 		Route::post('/', 'UserController@postLoginAdmin');
 	});
+
+	/*
+	|--------------------------------------------------------------------------
+	| Front End Routing
+	|--------------------------------------------------------------------------
+	*/
+	Route::get('/', 'HomeController@index');
 });
