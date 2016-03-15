@@ -1,3 +1,8 @@
+<?php
+	$controller_name = strtolower(substr(class_basename(Route::currentRouteAction()), 0, (strpos(class_basename(Route::currentRouteAction()), '@') -0)));
+	$action_name = strtolower(substr(class_basename(Route::currentRouteAction()), (strpos(class_basename(Route::currentRouteAction()), '@') + 1)));
+	$user_info = auth()->guard('admin')->user()->toArray();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>        
@@ -78,12 +83,58 @@
                                 <!-- IMAGE USER -->
                             </div>
                             <div class="profile-data">
-                                <div class="profile-data-name">John Doe</div>
+                                <div class="profile-data-name"><?php echo $user_info['full_name']; ?></div>
                                 <div class="profile-data-title">Web Developer/Designer</div>
                             </div>
                         </div>                                                                        
                     </li>
-
+					<?php
+						$active = "";
+						if ($controller_name == "dashboardcontroller"){
+							$active = "active";
+						}
+					?>
+                     <li class="<?php echo $active; ?>">
+						<a href="{{ URL::to('/zpanel/dashboard') }}" >
+							<span class='fa fa-desktop'></span> <span class='xn-text'>Dashboard</span>
+						</a>
+                    </li>
+					<?php
+						$active = "";
+						if (($controller_name == "userlevelcontroller") || ($controller_name == "usercontroller")){
+							$active = "active";
+						}
+					?>
+					<li class="xn-openable <?php echo $active; ?>">
+						<a href="#">
+							<span class="fa fa-users"></span>
+							<span class="xn-text">Membership</span>
+						</a>
+						<ul>
+							<?php
+								$active = "";
+								if ($controller_name == "userlevelcontroller"){
+									$active = "active";
+								}
+							?>
+							<li class="<?php echo $active; ?>">
+								<a href="{{ URL::to('/zpanel/user-level') }}" >
+									Master User Level
+								</a>
+							</li>
+							<?php
+								$active = "";
+								if ($controller_name == "usercontroller"){
+									$active = "active";
+								}
+							?>
+							<li class="<?php echo $active; ?>">
+								<a href="{{ URL::to('/zpanel/user') }}" >
+									Master User
+								</a>
+							</li>
+						</ul>
+					</li>
 					
 				</ul>
                 <!-- END X-NAVIGATION -->

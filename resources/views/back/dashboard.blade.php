@@ -12,7 +12,7 @@
 @section('content')
 	<?php
 		echo "<pre>";
-		print_r(auth()->guard('admin')->user());
+		print_r(auth()->guard('admin')->user()->toArray());
 		echo "</pre>";
 	?>
 @stop

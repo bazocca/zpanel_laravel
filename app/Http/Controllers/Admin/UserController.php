@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use Auth, Request, Session;
+use Auth;
+use Request;
+use Session;
 
 class UserController extends Controller
 {
