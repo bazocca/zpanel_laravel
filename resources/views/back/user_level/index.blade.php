@@ -14,8 +14,8 @@
 		/* Inisialisasi variabel */
 		$breadcrumb = array();
 		$breadcrumb['0']['text'] = "User Level";
-		$breadcrumb['0']['controller'] = "UserLevels";
-		$breadcrumb['0']['action'] = "index";
+		$breadcrumb['0']['controller'] = "user-level";
+		$breadcrumb['0']['action'] = "";
 		$page_title = "Master User Level";
 	?>
 	

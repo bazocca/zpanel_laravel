@@ -5,6 +5,8 @@ use Auth;
 use Request;
 use Session;
 
+use App\Models\UserLevel;
+
 class UserLevelController extends Controller
 {
 	public $title = "Master User Level";
@@ -15,7 +17,8 @@ class UserLevelController extends Controller
      */
     public function index()
     {
-
+		$query = UserLevel::where('status','>',0)->paginate(1);		
+		
 		return view($this->pathBack.'user_level.index')->with(
 			[
 				'title' => $this->title.' | '.$this->web_title,
