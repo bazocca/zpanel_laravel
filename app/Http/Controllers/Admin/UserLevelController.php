@@ -17,13 +17,27 @@ class UserLevelController extends Controller
      */
     public function index()
     {
-		$query = UserLevel::where('status','>',0)->paginate(1);		
+		$sort = "id";
+		$direction = "desc";
+		if (isset($_GET['sort'])){
+			$sort = $_GET['sort'];
+		}
+		if (isset($_GET['direction'])){
+			$direction = $_GET['direction'];
+		}
+		
+		$query = UserLevel::where('status','>',0)
+					->orderBy($sort, $direction)
+					->paginate(1);
 		
 		return view($this->pathBack.'user_level.index')->with(
 			[
 				'title' => $this->title.' | '.$this->web_title,
 				'keywords' => $this->admin_keywords,
-				'description' => $this->admin_description
+				'description' => $this->admin_description,
+				'content' => $query,
+				'sort' => $sort,
+				'direction' => $direction
 			]
 		);
     }
