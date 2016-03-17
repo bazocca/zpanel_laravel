@@ -72,7 +72,7 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-						<a href="{{ URL::to('/zpanel/dashboard') }}">
+						<a href="{!! URL::to('/'.$admin_prefix.'/dashboard') !!}">
 							{!! Html::image('img/logo/logo.png', 'Logo', array('width'=>'120','style' => 'margin-top:-18px;')) !!}
                         </a>
                         <a href="#" class="x-navigation-control"></a>
@@ -95,7 +95,7 @@
 						}
 					?>
                      <li class="<?php echo $active; ?>">
-						<a href="{{ URL::to('/zpanel/dashboard') }}" >
+						<a href="{!! URL::to('/'.$admin_prefix.'/dashboard') !!}" >
 							<span class='fa fa-desktop'></span> <span class='xn-text'>Dashboard</span>
 						</a>
                     </li>
@@ -118,7 +118,7 @@
 								}
 							?>
 							<li class="<?php echo $active; ?>">
-								<a href="{{ URL::to('/zpanel/user-level') }}" >
+								<a href="{!! URL::to('/'.$admin_prefix.'/user-level') !!}" >
 									Master User Level
 								</a>
 							</li>
@@ -129,7 +129,7 @@
 								}
 							?>
 							<li class="<?php echo $active; ?>">
-								<a href="{{ URL::to('/zpanel/user') }}" >
+								<a href="{!! URL::to('/'.$admin_prefix.'/user') !!}" >
 									Master User
 								</a>
 							</li>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-							<a href="{{ URL::to('/zpanel/logout') }}" class="btn btn-success btn-lg">Yes</a>
+							<a href="{!! URL::to('/'.$admin_prefix.'/logout') !!}" class="btn btn-success btn-lg">Yes</a>
                             <button class="btn btn-default btn-lg mb-control-close">No</button>
                         </div>
                     </div>

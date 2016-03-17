@@ -1,5 +1,5 @@
 	<ul class="breadcrumb">
-		<a href="{{ URL::to('/zpanel/dashboard') }}" >Dashboard</a>
+		<a href="{!! URL::to('/'.$admin_prefix.'/dashboard') !!}" >Dashboard</a>
 		<?php
 			if (count($breadcrumb) > 0){
 				for ($i = 0;$i < count($breadcrumb); $i++){
@@ -11,7 +11,7 @@
 						$controller = $breadcrumb[$i]["controller"];
 						$action = $breadcrumb[$i]["action"];
 		?>
-						<a href="{{ url('', ['zpanel', $controller, $action]) }}"><?php echo $breadcrumb[$i]["text"] ?></a>
+						<a href="{!! url('', [$admin_prefix, $controller, $action]) !!}"><?php echo $breadcrumb[$i]["text"] ?></a>
 		<?php
 					}
 				}

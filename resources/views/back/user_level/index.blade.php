@@ -41,11 +41,41 @@
 								<thead>
 									<tr>
 										<th>
-											{!! link_to('zpanel/user-level', 'ID', ['page' => 2]) !!}
+											@include('element.toggle_sort', [
+												'sort' => $sort, 
+												'direction' => $direction, 
+												'column' => 'id',
+												'route' => $admin_prefix.'.user-level.index',
+												'name' => 'ID'
+											])
 										</th>
-										<th>Name</th>
-										<th>Date Modified</th>
-										<th>Status</th>
+										<th>
+											@include('element.toggle_sort', [
+												'sort' => $sort, 
+												'direction' => $direction, 
+												'column' => 'level_name',
+												'route' => $admin_prefix.'.user-level.index',
+												'name' => 'Name'
+											])
+										</th>
+										<th>
+											@include('element.toggle_sort', [
+												'sort' => $sort, 
+												'direction' => $direction, 
+												'column' => 'updated_at',
+												'route' => $admin_prefix.'.user-level.index',
+												'name' => 'Date Modified'
+											])
+										</th>
+										<th>
+											@include('element.toggle_sort', [
+												'sort' => $sort, 
+												'direction' => $direction, 
+												'column' => 'status',
+												'route' => $admin_prefix.'.user-level.index',
+												'name' => 'Status'
+											])
+										</th>
 										<th>Functions</th>
 									</tr>
 								</thead>
