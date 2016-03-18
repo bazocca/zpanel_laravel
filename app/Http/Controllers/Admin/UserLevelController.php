@@ -27,8 +27,9 @@ class UserLevelController extends Controller
 		}
 		
 		$query = UserLevel::where('status','>',0)
+					->select('id', 'level_name', 'updated_at', 'status')
 					->orderBy($sort, $direction)
-					->paginate(1);
+					->paginate(2);
 		
 		return view($this->pathBack.'user_level.index')->with(
 			[
@@ -49,7 +50,13 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        //
+		return view($this->pathBack.'user_level.create')->with(
+			[
+				'title' => $this->title.' | Create | '.$this->web_title,
+				'keywords' => $this->admin_keywords,
+				'description' => $this->admin_description
+			]
+		);
     }
 
     /**
@@ -71,7 +78,16 @@ class UserLevelController extends Controller
      */
     public function show($id)
     {
-        //
+		$query = UserLevel::find($id);
+		return view($this->pathBack.'user_level.show')->with(
+			[
+				'title' => $this->title.' | View | '.$this->web_title,
+				'keywords' => $this->admin_keywords,
+				'description' => $this->admin_description,
+				'content' => $query
+			]
+		);
+		
     }
 
     /**

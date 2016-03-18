@@ -33,9 +33,25 @@
             <div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Tempat Search Ini</h3>
+						<div class="row">
+							<div class="col-md-5 col-md-offset-5 col-sm-6 col-sm-offset-4 col-xs-8">
+								<h3 class="panel-title">Tempat Search Ini</h3>
+							</div>
+							<div class="col-md-2 col-sm-2 col-xs-4 text-right">
+								<a href="{!! URL::route($admin_prefix.'.user-level.create') !!}" class="btn btn-primary btn-block">
+									Add Data
+								</a>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
+						<?php
+							if (count($content) <= 0){
+						?>
+								@include('element.not_found')
+						<?php
+							} else {
+						?>
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-actions">
 								<thead>
@@ -79,7 +95,7 @@
 										<th>Functions</th>
 									</tr>
 								</thead>
-								<tbody>  
+								<tbody>
 									@foreach ($content as $content_detail)
 										<tr>
 											<td>{{ $content_detail->id }}</td>
@@ -97,19 +113,19 @@
 												@include('element.status', ['active' => $active])
 											</td>
 											<td>
-												<a class="btn btn-info btn-rounded btn-sm"><span class="fa fa-info"> View</span></a>
-												<a class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"> Edit</span></a>
-												<a class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"> Delete</span></a>
-												<?php
-													// $button_function['id'] = $posts_single["UserLevel"]["id"];
-													// echo $this->element('function_button',$button_function);
-												?>
+												@include('element.button_function', [
+													'route' => $admin_prefix.'.user-level.',
+													'id' => $content_detail->id
+												])
 											</td>
 										</tr>
 									@endforeach
 								</tbody>
 							</table>
-						</div> 
+						</div>
+						<?php
+							}
+						?>
 						<div class="row info-paging">
 							<div class="col-md-12">
 								<!-- START PAGINATION -->

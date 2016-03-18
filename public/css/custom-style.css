@@ -10,3 +10,8 @@ th > a.desc:after {
     content: " \f0de";
     font-family: FontAwesome;
 }
+
+.panel .panel-title{
+	font-size : 14px;
+	
+}
