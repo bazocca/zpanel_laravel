@@ -35,7 +35,7 @@ class UserController extends Controller
 		if ($auth->attempt($credentials)) {
 			return redirect('/'.$this->admin_prefix.'/dashboard');
 		} else {
-			return redirect('/'.$this->admin_prefix.'')->with('auth-error', 'Username or password is incorrect');
+			return redirect('/'.$this->admin_prefix)->with('auth-error', 'Username or password is incorrect');
 		}
 		return view($this->pathBack.'user.login')->with(
 			[

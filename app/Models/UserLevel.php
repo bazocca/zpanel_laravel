@@ -12,6 +12,10 @@ class UserLevel extends Model
         'level_name', 'status', 'id_created', 'id_modified',
     ];
 
+	public static $rules = array(
+		'level_name' => 'required',
+	);
+  
 	public function user_create()
 	{
 		return $this->belongsTo('App\Models\User', 'id_created');
@@ -20,6 +24,5 @@ class UserLevel extends Model
 	public function user_modify()
 	{
 		return $this->belongsTo('App\Models\User', 'id_modified');
-	}
-    
+	}    
 }

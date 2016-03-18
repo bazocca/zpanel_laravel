@@ -52,20 +52,20 @@
 						</div>
 						<div class="panel-body">                                                                        
 							<div class="form-group">
-								<label class="col-md-3 col-xs-12 control-label">ID</label>
-								<div class="col-md-6 col-xs-12 control-label text-left">
+								<label class="col-sm-3 col-xs-12 control-label">ID</label>
+								<div class="col-sm-6 col-xs-12 control-label text-left">
 									{!! $content->id !!}
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 col-xs-12 control-label">Name</label>
-								<div class="col-md-6 col-xs-12 control-label text-left">
+								<label class="col-sm-3 col-xs-12 control-label">Name</label>
+								<div class="col-sm-6 col-xs-12 control-label text-left">
 									{!! $content->level_name !!}
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 col-xs-12 control-label">Status</label>
-								<div class="col-md-6 col-xs-12 text-left">
+								<label class="col-sm-3 col-xs-12 control-label">Status</label>
+								<div class="col-sm-6 col-xs-12 text-left">
 									<?php
 										$active = $content->status;
 									?>
@@ -77,7 +77,6 @@
 				</form>
 			</div>
 		</div>                    
-		
 	</div>
 	<!-- END PAGE CONTENT WRAPPER -->	
 @stop

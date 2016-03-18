@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use Auth;
 use Request;
+use Auth;
 use Session;
 
 use App\Models\UserLevel;
@@ -65,9 +65,24 @@ class UserLevelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+		$input = Request::all();
+		$input["status"] = 1;
+		$input["id_created"] = ;
+		
+        $validation = Validator::make($input, UserLevel::$rules);
+
+        if ($validation->passes())
+        {
+            UserLevel::create($input);
+            return redirect('/'.$this->admin_prefix.'/user-level');
+        }
+
+        return redirect('/'.$this->admin_prefix.'/user-level/create')
+            ->withInput()
+            ->withErrors($validation)
+            ->with('message', 'There were validation errors.');        
     }
 
     /**
@@ -108,7 +123,7 @@ class UserLevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
     }

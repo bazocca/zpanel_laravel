@@ -30,13 +30,49 @@
 	@include('element.page_title', ['page_title' => $page_title])
 	<!-- END PAGE TITLE -->
 
-
-	<!-- Entête de page -->
-
-	<div class="col-sm-12">
-		{!! Form::open(['url' => 'user-level', 'method' => 'post', 'class' => 'form-horizontal']) !!}	
-		
-		{!! Form::close() !!}
+	<!-- PAGE CONTENT WRAPPER -->
+	<div class="page-content-wrap">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-10 col-sm-2 col-sm-offset-10 col-xs-4 col-xs-offset-8 text-right">
+				<a href="{!! URL::route($admin_prefix.'.user-level.index') !!}" class="btn btn-primary btn-block">
+					Back
+				</a>
+			</div>
+			<br/><br/><br/>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				{!! Form::open(['url' => $admin_prefix.'/user-level', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h2 class="panel-title">
+								Form Create New User Level
+							</h2>
+						</div>
+						<div class="panel-body">
+							@if ($errors->any())
+								<div class="form-group">
+									<ul>
+										{!! implode('', $errors->all('<li class="error">:message</li>')) !!}
+									</ul>
+								</div>									
+							@endif						
+							<div class="form-group">
+								<label class="col-sm-3 col-xs-12 control-label">Name</label>
+								<div class="col-sm-5 col-xs-12">
+									{!! Form::text('level_name', null, ['class' => 'form-control']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-3 col-sm-5">
+									{!! Form::submit('Submit', array('class' => 'btn btn-primary btn-block')) !!}
+								</div>
+							</div>							
+						</div>
+					</div>
+				{!! Form::close() !!}
+			</div>
+		</div>                    
 	</div>
-
+	<!-- END PAGE CONTENT WRAPPER -->		
 @stop
