@@ -1,9 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+
 use Request;
+use Validator;
+use DB;
 use Auth;
 use Session;
+use Redirect;
 
 use App\Models\UserLevel;
 
@@ -17,6 +21,11 @@ class UserLevelController extends Controller
      */
     public function index()
     {
+		$search = "";
+		if (isset($_GET["search"])){
+			$search =  $_GET["search"];
+		}
+		
 		$sort = "id";
 		$direction = "desc";
 		if (isset($_GET['sort'])){
@@ -25,12 +34,10 @@ class UserLevelController extends Controller
 		if (isset($_GET['direction'])){
 			$direction = $_GET['direction'];
 		}
-		
-		$query = UserLevel::where('status','>',0)
+		$query = UserLevel::whereRaw('status > 0 AND (level_name LIKE "%'.$search.'%")')
 					->select('id', 'level_name', 'updated_at', 'status')
 					->orderBy($sort, $direction)
 					->paginate(2);
-		
 		return view($this->pathBack.'user_level.index')->with(
 			[
 				'title' => $this->title.' | '.$this->web_title,
@@ -38,7 +45,8 @@ class UserLevelController extends Controller
 				'description' => $this->admin_description,
 				'content' => $query,
 				'sort' => $sort,
-				'direction' => $direction
+				'direction' => $direction,
+				'search' => $search
 			]
 		);
     }
@@ -68,21 +76,28 @@ class UserLevelController extends Controller
     public function store()
     {
 		$input = Request::all();
+		$table_id = DB::table('user_levels')
+                ->orderBy('id', 'desc')
+				->take(1)
+				->value('id');
+		if (empty($table_id)){
+			$table_id = 1;
+		} else {
+			$table_id++;
+		}
+		$input["id"] = $table_id;
 		$input["status"] = 1;
-		$input["id_created"] = ;
-		
-        $validation = Validator::make($input, UserLevel::$rules);
-
+		$input["id_created"] = auth()->guard('admin')->user()->id;
+		$input["id_modified"] = auth()->guard('admin')->user()->id;
+        $validation = Validator::make($input, UserLevel::$rules, UserLevel::$messages);
         if ($validation->passes())
         {
             UserLevel::create($input);
-            return redirect('/'.$this->admin_prefix.'/user-level');
+            return redirect('/'.$this->admin_prefix.'/user-level')->with('alert-success', 'Data has been saved');
         }
-
         return redirect('/'.$this->admin_prefix.'/user-level/create')
             ->withInput()
-            ->withErrors($validation)
-            ->with('message', 'There were validation errors.');        
+            ->withErrors($validation);
     }
 
     /**
@@ -113,7 +128,15 @@ class UserLevelController extends Controller
      */
     public function edit($id)
     {
-        //
+		$query = UserLevel::find($id);
+		return view($this->pathBack.'user_level.edit')->with(
+			[
+				'title' => $this->title.' | Update | '.$this->web_title,
+				'keywords' => $this->admin_keywords,
+				'description' => $this->admin_description,
+				'content' => $query
+			]
+		);
     }
 
     /**
@@ -125,7 +148,19 @@ class UserLevelController extends Controller
      */
     public function update($id)
     {
-        //
+		$input = Request::all();
+		$input["id_modified"] = auth()->guard('admin')->user()->id;
+        $validation = Validator::make($input, UserLevel::$rules, UserLevel::$messages);
+        if ($validation->passes())
+        {
+			$query = UserLevel::find($id);
+            $query->update($input);			
+            return redirect('/'.$this->admin_prefix.'/user-level')->with('alert-success', 'Data has been saved');
+        }
+		
+		return Redirect::route($this->admin_prefix.'.user-level.edit', $id)
+				->withInput()
+				->withErrors($validation);
     }
 
     /**
@@ -136,6 +171,10 @@ class UserLevelController extends Controller
      */
     public function destroy($id)
     {
-        //
+		$input["id_modified"] = auth()->guard('admin')->user()->id;
+		$input["status"] = 0;
+		$query = UserLevel::find($id);
+		$query->update($input);			
+		return redirect('/'.$this->admin_prefix.'/user-level')->with('alert-success', 'Data has been deleted');
     }
 }

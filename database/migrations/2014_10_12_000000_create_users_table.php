@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 200)->unique();
             $table->string('password', 60);
 			$table->tinyInteger('status');
+			$table->integer('id_media_library');
 			$table->integer('id_user_level');
 			$table->integer('id_created');
 			$table->integer('id_modified');

@@ -16,10 +16,10 @@
 		$breadcrumb['0']['text'] = "User Level";
 		$breadcrumb['0']['controller'] = "user-level";
 		$breadcrumb['0']['action'] = "";
-		$breadcrumb['1']['text'] = "Create";
+		$breadcrumb['1']['text'] = "Update";
 		$breadcrumb['1']['controller'] = "user-level";
 		$breadcrumb['1']['action'] = "";
-		$page_title = "Create User Level";
+		$page_title = "Update User Level";
 	?>
 	
 	<!-- START BREADCRUMB -->
@@ -40,16 +40,16 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12">
-				{!! Form::open(['url' => $admin_prefix.'/user-level', 'method' => 'post', 'class' => 'form-horizontal']) !!}
+			<div class="col-md-12">
+				{!! Form::model($content, ['method' => 'PATCH', 'route' => [$admin_prefix.'.user-level.update', $content->id], 'class' => 'form-horizontal']) !!}	
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2 class="panel-title">
-								Form Create User Level
+								Form Update User Level
 							</h2>
 							<ul class="panel-controls">
 								<li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                            </ul>							
+                            </ul>
 						</div>
 						<div class="panel-body">
 							@if ($errors->any())
@@ -63,9 +63,28 @@
 								</div>
 							@endif
 							<div class="form-group">
+								<label class="col-sm-3 col-xs-12 control-label">ID</label>
+								<div class="col-sm-5 col-xs-12 control-label text-left">
+									{!! $content->id !!}
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-3 col-xs-12 control-label">Name</label>
 								<div class="col-sm-5 col-xs-12">
-									{!! Form::text('level_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+									{!! Form::text('level_name', null, ['class' => 'form-control']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-xs-12 control-label">Status</label>
+								<div class="col-sm-2 col-xs-12">
+									{!! Form::select('status', [
+										'1' => 'Active',
+										'2' => 'Deactive',
+										],
+										null,[
+										'class' =>  'form-control'
+										]
+									) !!}
 								</div>
 							</div>
 							<div class="form-group">

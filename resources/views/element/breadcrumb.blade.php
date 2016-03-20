@@ -1,9 +1,9 @@
 	<ul class="breadcrumb">
-		<a href="{!! URL::to('/'.$admin_prefix.'/dashboard') !!}" >Dashboard</a>
+		<li><a href="{!! URL::to('/'.$admin_prefix.'/dashboard') !!}" >Dashboard</a></li>
 		<?php
 			if (count($breadcrumb) > 0){
 				for ($i = 0;$i < count($breadcrumb); $i++){
-					echo "&nbsp;&nbsp;/&nbsp;&nbsp;";
+					echo "<li>";
 					/* LAST DATA */
 					if ($i == count($breadcrumb) - 1){
 						echo $breadcrumb[$i]["text"];
@@ -14,6 +14,7 @@
 						<a href="{!! url('', [$admin_prefix, $controller, $action]) !!}"><?php echo $breadcrumb[$i]["text"] ?></a>
 		<?php
 					}
+					echo "</li>";
 				}
 			}
 		?>

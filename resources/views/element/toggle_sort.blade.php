@@ -13,7 +13,8 @@
 ?>
 {!! link_to_route($route, $name, [
 	'sort' => $column,
-	'direction' => $direction
+	'direction' => $direction,
+	'search' => $search
 	],[
 	'class' => $icon_direction
 	]

@@ -21,7 +21,7 @@
 					<div class="message error text-center" style="border-radius:3px;background:#cc2424;padding:7px;margin-bottom:5px;">
 						<h6><b><font color="white">{!! Session::get('auth-error') !!}</font></b></h6>
 					</div>
-				@endif			
+				@endif
 				<div class="login-title"><strong>Log In</strong> to your account</div>
 					{!! Form::open(['class' => 'form-horizontal']) !!}
 					<div class="form-group">
