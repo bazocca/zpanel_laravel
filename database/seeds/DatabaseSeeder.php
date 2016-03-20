@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User, App\Models\UserLevel;
+use App\Models\User, App\Models\UserLevel, App\Models\MediaLibrary;
 
 class DatabaseSeeder extends Seeder {
 
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder {
 			'id_user_level' => 1,
 			'id_created' => 1,
 			'id_modified' => 1,
-			'id_media_library' => 0
+			'id_media_library' => 1
 		]);
 
 		UserLevel::create([
@@ -52,6 +52,13 @@ class DatabaseSeeder extends Seeder {
 			'id_modified' => 1
 		]);
 		
+		MediaLibrary::create([
+			'id' => 1,
+			'name' => 'noimage',
+			'type' => 'jpg',
+			'url' => 'img/noimage.jpg',
+			'id_created' => 1
+		]);
 		
 	}
 

@@ -30,5 +30,10 @@ class User extends Authenticatable
 	{
 		return $this->belongsTo('App\Models\UserLevel', 'id_user_level');
 	}
+
+	public function profile_image()
+	{
+		return $this->belongsTo('App\Models\MediaLibrary', 'id_media_library');
+	}
 	
 }

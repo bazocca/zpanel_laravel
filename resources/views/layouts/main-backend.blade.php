@@ -83,8 +83,11 @@
                                 <!-- IMAGE USER -->
                             </div>
                             <div class="profile-data">
+								<div class="profile-image">
+									{!! Html::image($profile_image, 'Profile Picture') !!}
+								</div>
                                 <div class="profile-data-name"><?php echo $user_info['full_name']; ?></div>
-                                <div class="profile-data-title">Web Developer/Designer</div>
+                                <div class="profile-data-title">{!! $user_level !!}</div>
                             </div>
                         </div>                                                                        
                     </li>
