@@ -60,6 +60,9 @@ class DatabaseSeeder extends Seeder {
 			'id_created' => 1
 		]);
 		
-	}
+	    $this->call('UsersTableSeeder');
+        $this->call('UserLevelsTableSeeder');
+        $this->call('MediaLibrariesTableSeeder');
+    }
 
 }
